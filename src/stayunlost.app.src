@@ -5,9 +5,10 @@
   {registered, []},
   {applications, [
                   kernel,
-                  stdlib
+                  stdlib,
+                  cowboy
                  ]},
   {mod, { stayunlost_app, []}},
   {agner, [{requires, ["cowboy"]}]},
-  {env, []}
+  {env, [{port, 8080}]}
  ]}.
