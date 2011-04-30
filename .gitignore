@@ -2,3 +2,4 @@ ebin
 .agner.config
 deps
 .eunit
+rel/stayunlost
