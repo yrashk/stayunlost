@@ -1,0 +1,13 @@
+{application, stayunlost,
+ [
+  {description, ""},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { stayunlost_app, []}},
+  {agner, [{requires, ["cowboy"]}]},
+  {env, []}
+ ]}.
