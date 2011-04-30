@@ -23,12 +23,6 @@ start_link() ->
 %% ===================================================================
 
 init([]) ->
-    {ok, Port} = application:get_env(stayunlost, port),
-    Dispatch = [{'_', [{'_', stayunlost_http_handler, []}]}],
     {ok, { {one_for_one, 5, 10}, [
-                                  {stayunlost_http_server, {cowboy, start_listener, [http, 100, 
-                                                                                     cowboy_tcp_transport, [{port, Port}],
-                                                                                     cowboy_http_protocol, [{dispatch, Dispatch}]]},
-                                   permanent, infinity, supervisor, [stayunlost_http_handler, cowboy, cowboy_http_protocol, cowboy_tcp_transport]}
-                                 ]} }.
+                                 ]}}.
 

@@ -10,7 +10,14 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-    stayunlost_sup:start_link().
+    {ok, Port} = application:get_env(stayunlost, port),
+    Dispatch = [{'_', [{'_', stayunlost_http_handler, []}]}],
+    {ok, Listener} = cowboy:start_listener(http, 100,
+                                           cowboy_tcp_transport, [{port, Port}],
+                                           cowboy_http_protocol, [{dispatch, Dispatch}]),
+    {ok, Pid} = stayunlost_sup:start_link(),
+    {ok, Pid, Listener}.
 
-stop(_State) ->
+stop(Listener) ->
+    cowboy:stop_listener(Listener),
     ok.
